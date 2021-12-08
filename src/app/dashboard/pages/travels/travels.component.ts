@@ -13,7 +13,7 @@ export class TravelsComponent implements OnInit{
   cards:TravelsData[]=[];
 
   constructor(private travelStatusService:TravelsStatusService){}
-  //(@Output() onSendTravels: EventEmitter<TravelsData[]>=new EventEmitter;
+  
 
   ngOnInit(){
     this.travelStatusService.travelsGet().subscribe(resp =>{
