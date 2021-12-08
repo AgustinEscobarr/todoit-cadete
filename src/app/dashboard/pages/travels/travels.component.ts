@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { TravelsData } from '../../models/travels-structure';
+import { TravelsStatusService } from '../../services/travels-status.service';
+
 
 @Component({
   selector: 'app-travels',
   templateUrl: './travels.component.html',
   styleUrls: ['./travels.component.scss']
 })
-export class TravelsComponent implements OnInit {
+export class TravelsComponent implements OnInit{
 
-  constructor() { }
+  cards:TravelsData[]=[];
 
-  ngOnInit(): void {
+  constructor(private travelStatusService:TravelsStatusService){}
+  //(@Output() onSendTravels: EventEmitter<TravelsData[]>=new EventEmitter;
+
+  ngOnInit(){
+    this.travelStatusService.travelsGet().subscribe(resp =>{
+      console.log(resp);
+      this.cards=resp;
+    });
   }
-
 }

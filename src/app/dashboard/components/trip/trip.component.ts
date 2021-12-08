@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { TravelsData } from '../../models/travels-structure';
 
 @Component({
   selector: 'app-trip',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TripComponent implements OnInit {
 
+  @Input() cards:TravelsData[]=[];
+  //(@Output() onSendTravels: EventEmitter<TravelsData[]>=new EventEmitter;
   constructor() { }
 
   ngOnInit(): void {

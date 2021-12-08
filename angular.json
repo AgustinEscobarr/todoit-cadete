@@ -74,6 +74,7 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          
           "configurations": {
             "production": {
               "browserTarget": "ti-logistics-hub-cadet:build:production"

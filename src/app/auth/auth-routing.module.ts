@@ -6,13 +6,14 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 const routes: Routes = [
   { 
     path: '', 
-    component: AuthComponent 
-  },
-  {
+    component: AuthComponent ,
+  children:[
+    {
    path:'sign-in',
    component:SignInComponent
   }
-];
+]
+}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
