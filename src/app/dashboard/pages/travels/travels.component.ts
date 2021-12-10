@@ -31,6 +31,7 @@ export class TravelsComponent implements OnInit{
     }
   ];
   cards:TravelsData[]=[];
+  cardsCurse:TravelsData[]=[];
 
   
 
@@ -39,7 +40,8 @@ export class TravelsComponent implements OnInit{
   
 
   ngOnInit(){
-    this.receiveData(1,(a:number,b:TravelsData[])=>{})
+    this.receiveData(1,(a:number,b:TravelsData[])=>{});
+    this.receiveCurseData(1,(a:number,b:TravelsData[])=>{});
     
     
   }
@@ -62,6 +64,26 @@ export class TravelsComponent implements OnInit{
    )
     
   }
+  receiveCurseData(id:number,callback:Function){
+    let dos = this.travelStatusService.travelsGet(2);
+    let tres = this.travelStatusService.travelsGet(3);
+    let seis = this.travelStatusService.travelsGet(6);
+    let siete = this.travelStatusService.travelsGet(7);
+    forkJoin([dos,tres,seis,siete]).subscribe(
+      resp=>{
+        console.log([...resp[0],...resp[1],...resp[2],...resp[3]]);
+        this.cardsCurse=[...resp[0],...resp[1],...resp[2],...resp[3]];
+        
+        this.cards.sort((a,b)=>{
+          return (Date.parse(a.travelEquipmentDTOs[a.travelEquipmentDTOs.length- 1].operationDate)- Date.parse(b.travelEquipmentDTOs[b.travelEquipmentDTOs.length- 1].operationDate));
+          
+        });
+        callback(id,this.cardsCurse);
+      }
+      
+    )
+     
+   }
   requestTripValidate(id:number,cards:TravelsData[]):Function{
     let valid:boolean=false;
         for(let i=0;i<=cards.length -1; i++){

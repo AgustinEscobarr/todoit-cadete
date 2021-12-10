@@ -1,4 +1,6 @@
-<span>Viajes disponibles {{cardsEnvio().length}}</span>
+<span *ngIf="selected">Viajes disponibles {{cardsEnvio().length}}</span>
+<span *ngIf="!selected">Viajes disponibles {{cardsCurseEnvio().length}}</span>
+<div *ngIf="selected">
 <mat-card class="example-card" *ngFor="let card of cardsEnvio()">
     <mat-card-title-group>
       <span *ngIf="card.lastStatusTravel==5">Tengo status travel 5</span>
@@ -15,3 +17,23 @@
       
     </mat-card-actions>
   </mat-card>
+</div>
+<!--Viajes en Curso-->
+<div *ngIf="!(selected)">
+  <mat-card class="example-card" *ngFor="let card of cardsCurseEnvio()">
+    <mat-card-title-group>
+      
+      <mat-card-title>Marca {{card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].equipment.mark}}
+        </mat-card-title>
+      <mat-card-subtitle>Modelo {{card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].equipment.model}}</mat-card-subtitle>
+      <img mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+    </mat-card-title-group>
+    <mat-card-content>
+     Contenido de la carta
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button >Algun día va a hacer algo</button>
+      
+    </mat-card-actions>
+  </mat-card>
+</div>
