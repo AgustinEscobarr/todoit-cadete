@@ -2,9 +2,10 @@
 <mat-form-field appearance="fill">
   <mat-label>Viajes</mat-label>
   <mat-select [(value)]="selected">
-    <mat-option *ngFor="let option of options" >
-      {{option}}
+    <mat-option [value]=option.value *ngFor="let option of options" >
+      {{option.viewValue}}
     </mat-option>
   </mat-select>
+  <span>{{selected}}</span>
 </mat-form-field>
-<app-trip [selected]="selected" [cards]="cards" (onChangeStatus)=" receiveData($event,requestTripValidate)"></app-trip>
+<app-trip [cards]="cards" (onChangeStatus)=" receiveData($event,requestTripValidate)" *ngIf="selected"></app-trip>

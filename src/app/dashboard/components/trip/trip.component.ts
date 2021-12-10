@@ -8,7 +8,7 @@ import { TravelsData } from '../../models/travels-structure';
 })
 export class TripComponent implements OnInit {
 
-  @Input() selected:string='';
+  @Input() selected:boolean=true;
   @Input() cards:TravelsData[]=[];
   @Output() onChangeStatus: EventEmitter<number>=new EventEmitter;
   constructor() { }

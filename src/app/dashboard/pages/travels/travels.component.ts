@@ -4,6 +4,12 @@ import { TravelsData } from '../../models/travels-structure';
 import { TravelsStatusService } from '../../services/travels-status.service';
 import { forkJoin} from 'rxjs';
 
+interface options{
+  value:boolean,
+  viewValue:string
+}
+
+
 
 @Component({
   selector: 'app-travels',
@@ -11,12 +17,22 @@ import { forkJoin} from 'rxjs';
   styleUrls: ['./travels.component.scss']
 })
 export class TravelsComponent implements OnInit{
+  
+  selected=true
 
-
-  options:string[]=["Viajes Disponibles","Viajes en Curso"];
+  options:options[]=[
+    {
+      value:true,
+      viewValue:'Viajes Disponibles'
+    },
+    {
+      value:false,
+      viewValue:'Viajes en Curso'
+    }
+  ];
   cards:TravelsData[]=[];
 
-  selected:string='';
+  
 
   @Input()id: number=0;
   constructor(private travelStatusService:TravelsStatusService){}
