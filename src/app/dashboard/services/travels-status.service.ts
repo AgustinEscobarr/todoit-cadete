@@ -9,8 +9,9 @@ export class TravelsStatusService {
 
   constructor(private http: HttpClient) { }
 
-  travelsGet(): Observable<[]> {
+  travelsGet(statusTravel:number): Observable<[]> {
     //let loged=1
-    return this.http.get<[]>(`/api/Travel/2/1`);
+    
+    return this.http.get<[]>(`/api/Travel/2/${statusTravel}`);
   }
 }
