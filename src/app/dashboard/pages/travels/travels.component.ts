@@ -48,11 +48,11 @@ export class TravelsComponent implements OnInit{
   receiveData(id:number,callback:Function){
    let uno = this.travelStatusService.travelsGet(1);
    let cinco = this.travelStatusService.travelsGet(5);
-   let diez = this.travelStatusService.travelsGet(10);
-   forkJoin([uno,cinco,diez]).subscribe(
+   
+   forkJoin([uno,cinco]).subscribe(
      resp=>{
-       console.log([...resp[0],...resp[1],...resp[2]]);
-       this.cards=[...resp[0],...resp[1],...resp[2]];
+       console.log([...resp[0],...resp[1]]);
+       this.cards=[...resp[0],...resp[1]];
        
        this.cards.sort((a,b)=>{
          return (Date.parse(a.travelEquipmentDTOs[a.travelEquipmentDTOs.length- 1].operationDate)- Date.parse(b.travelEquipmentDTOs[b.travelEquipmentDTOs.length- 1].operationDate));

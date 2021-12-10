@@ -8,8 +8,6 @@ import { TravelsData } from '../../models/travels-structure';
 })
 export class TripComponent implements OnInit {
 
-  @Input()cardsCurse:TravelsData[]=[];
-  @Input() selected:boolean=true;
   @Input() cards:TravelsData[]=[];
   @Output() onChangeStatus: EventEmitter<number>=new EventEmitter;
   constructor() { }
@@ -19,9 +17,7 @@ export class TripComponent implements OnInit {
     return this.cards
 
   }
-  cardsCurseEnvio(){
-    return this.cardsCurse;
-  }
+  
   ngOnInit(): void {
   }
   requestTrip(id:number){

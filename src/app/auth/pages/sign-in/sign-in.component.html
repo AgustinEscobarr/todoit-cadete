@@ -1,1 +1,21 @@
-<p>sign-in works! hooolaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+<main>
+    <h1 class="titulo">Iniciar Sesion</h1>
+  
+  
+    
+        <form class="form"  [formGroup]="loginForm" #formDirective=ngForm   (ngSubmit)="onSubmit(formDirective)">
+            <mat-form-field class="matform" appearance="fill">
+              <mat-label class="namefield">Email:</mat-label>
+              <input name="email" type="email" matInput formControlName="email" required>
+            </mat-form-field>
+            <mat-form-field class="matform" appearance="fill">
+              <mat-label class="namefield">Contraseña:</mat-label>
+              <input class="input" name="password" type="password" matInput formControlName="password" required>
+            </mat-form-field>
+            
+                <button type="submit" mat-raised-button [disabled]="!loginForm.valid" >Entrar</button>
+            
+        </form>
+    
+    
+</main>

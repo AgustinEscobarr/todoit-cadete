@@ -1,3 +1,4 @@
+<app-header></app-header>
 <h4>Filtro</h4>
 <mat-form-field appearance="fill">
   <mat-label>Viajes</mat-label>
@@ -8,5 +9,5 @@
   </mat-select>
   <span>{{selected}}</span>
 </mat-form-field>
-<app-trip [cardsCurse]="cardsCurse" [selected]="selected" [cards]="cards" (onChangeStatus)=" receiveData($event,requestTripValidate)" ></app-trip>
-
+<app-trip *ngIf="selected" [cards]="cards" (onChangeStatus)=" receiveData($event,requestTripValidate)" ></app-trip>
+<app-trip *ngIf="!selected" [cards]="cardsCurse"></app-trip>
