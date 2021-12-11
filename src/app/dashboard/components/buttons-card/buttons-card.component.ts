@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeOptions } from '../../models/change-options';
 
 @Component({
   selector: 'app-buttons-card',
@@ -7,12 +8,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ButtonsCardComponent implements OnInit {
 
+  @Input()travelId :number=0
   @Input()status :number = 0;
-  @Output() onButtonEvent:EventEmitter<number>=new EventEmitter
+  @Output() onButtonEvent:EventEmitter<ChangeOptions>=new EventEmitter
+  cadeteId :number=JSON.parse(localStorage.getItem('userLoged')||'').id
   constructor() { }
 
-  sendClick(){
-    this.onButtonEvent.emit()
+  sendClick(changeOptions:ChangeOptions){
+    this.onButtonEvent.emit(changeOptions)
   }
   ngOnInit(): void {
   }

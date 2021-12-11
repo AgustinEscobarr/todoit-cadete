@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TravelsData } from '../../models/travels-structure';
+import { ChangeOptions } from '../../models/change-options';
 export interface DataTravel{
   id:number,
   status? :number,
@@ -13,7 +14,7 @@ export interface DataTravel{
 export class TripComponent implements OnInit {
 
   @Input() cards:TravelsData[]=[];
-  @Output() onChangeStatus: EventEmitter<DataTravel>=new EventEmitter;
+  @Output() onChangeStatus: EventEmitter<ChangeOptions>=new EventEmitter;
   constructor() { }
 
   cardsEnvio():TravelsData[]{
@@ -24,13 +25,10 @@ export class TripComponent implements OnInit {
   
   ngOnInit(): void {
   }
-  requestTrip(id:number,status:number){
-    console.log(id);
-    let object:DataTravel = {
-      id:id,
-      status :status,
-    }
-    this.onChangeStatus.emit(object);
+  requestTrip(changeOptions:ChangeOptions,status:number){
+    console.log(changeOptions.travelId);
+    
+    this.onChangeStatus.emit(changeOptions);
   }
 
 }

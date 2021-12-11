@@ -1,5 +1,38 @@
 
-<button *ngIf="(status==1)||(status==5)" (click)="sendClick()"  mat-button>Quiero este viaje</button>
-<button *ngIf="(status==2)||(status==6)" (click)="sendClick()"  mat-button>Lo tengo!</button>
-<button *ngIf="(status==2)||(status==6)" (click)="sendClick()"  mat-button>Renunciar</button>
-<button *ngIf="(status==3)||(status==7)" (click)="sendClick()"  mat-button>Entregado</button>
+<button *ngIf="(status==1)||(status==5)" (click)="sendClick(
+    {
+        travelId:travelId,
+        isReasigned:false,
+        newStatusTravel:status+1,
+        cadeteId:cadeteId,
+        userOperation:2,
+        Observations:''
+    }
+)"  mat-button>Quiero este viaje</button>
+
+<button *ngIf="(status==2)||(status==6)" (click)="sendClick({
+    travelId:travelId,
+    isReasigned:false,
+    newStatusTravel:status+1,
+    cadeteId:cadeteId,
+    userOperation:2,
+    Observations:''
+})"  mat-button>Lo tengo!</button>
+
+<button *ngIf="(status==2)||(status==6)" (click)="sendClick({
+    travelId:travelId,
+    isReasigned:true,
+    newStatusTravel:status-1,
+    cadeteId:cadeteId,
+    userOperation:2,
+    Observations:''
+})"  mat-button>Renunciar</button>
+
+<button *ngIf="(status==3)||(status==7)" (click)="sendClick({
+    travelId:travelId,
+    isReasigned:false,
+    newStatusTravel:status+1,
+    cadeteId:cadeteId,
+    userOperation:2,
+    Observations:''
+})"  mat-button>Entregado</button>
