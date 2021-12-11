@@ -11,8 +11,8 @@
      Contenido de la carta
     </mat-card-content>
     <mat-card-actions>
-      <app-buttons-card [status]="card.lastStatusTravel" (onButtonEvent)="requestTrip(card.id)"></app-buttons-card>
-    
-      
+
+      <app-buttons-card [status]="card.lastStatusTravel" (onButtonEvent)="requestTrip(card.id, card.lastStatusTravel)"></app-buttons-card>
+  
     </mat-card-actions>
   </mat-card>

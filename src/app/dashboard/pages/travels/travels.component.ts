@@ -3,6 +3,9 @@ import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { TravelsData } from '../../models/travels-structure';
 import { TravelsStatusService } from '../../services/travels-status.service';
 import { forkJoin} from 'rxjs';
+import { ChangeStatusService } from '../../services/change-status.service';
+import { ChangeOptions } from '../../models/change-options';
+import { DataTravel } from '../../components/trip/trip.component';
 
 interface options{
   value:boolean,
@@ -36,16 +39,16 @@ export class TravelsComponent implements OnInit{
   
 
   @Input()id: number=0;
-  constructor(private travelStatusService:TravelsStatusService){}
+  constructor(private travelStatusService:TravelsStatusService, private changeStatusService: ChangeStatusService){}
   
 
   ngOnInit(){
-    this.receiveData(1,(a:number,b:TravelsData[])=>{});
+    this.receiveData({id:0},(a:number,b:TravelsData[])=>{});
     this.receiveCurseData(1,(a:number,b:TravelsData[])=>{});
     
     
   }
-  receiveData(id:number,callback:Function){
+  receiveData(object:DataTravel,callback:Function){
    let uno = this.travelStatusService.travelsGet(1);
    let cinco = this.travelStatusService.travelsGet(5);
    
@@ -58,7 +61,7 @@ export class TravelsComponent implements OnInit{
          return (Date.parse(a.travelEquipmentDTOs[a.travelEquipmentDTOs.length- 1].operationDate)- Date.parse(b.travelEquipmentDTOs[b.travelEquipmentDTOs.length- 1].operationDate));
          
        });
-       callback(id,this.cards);
+       callback(object,this.cards);
      }
      
    )
@@ -84,16 +87,57 @@ export class TravelsComponent implements OnInit{
     )
      
    }
-  requestTripValidate(id:number,cards:TravelsData[]):Function{
-    let valid:boolean=false;
-        for(let i=0;i<=cards.length -1; i++){
-          if(cards[i].id==id){
-            console.log("todavía disponible")
-            valid=true;
-            break;
-          }
-        } 
+  requestTripValidate(object:DataTravel,cards:TravelsData[]):Function{
+    if(object.status==1||object.status==5){
+      for(let i=0;i<=cards.length -1; i++){
+        if(cards[i].id==object.id){
+          console.log("todavía disponible")
+          
+          this.changeControl(object)
+          
+          break;
+        }
+      }
+
+    }else{
+      this.changeControl(object)
+    }
+    
+        
+
       return new Function('')
+  }
+  changeControl(object:DataTravel){
+    let cadeteId= JSON.parse(localStorage.getItem('userLoged')||'').id;
+    (object.status==1?this.changeStatusGeneral(object.id,2,cadeteId):'');
+    (object.status==5?this.changeStatusGeneral(object.id,6,cadeteId):'');
+  }
+  changeStatusGeneral(travelId:number,newStatusTravel:number,cadeteId:number){
+   let changeOptions:ChangeOptions={
+     travelId:travelId,
+     isReasigned:false,
+     newStatusTravel:newStatusTravel,
+     cadeteId:cadeteId,
+     userOperation:2,
+     Observations:''
+
+    }
+    this.changeStatusService.changeStatus(changeOptions).subscribe(
+      {
+        next: (resp) =>
+        {
+          console.log('todo bien bro :)')
+          console.log(resp);
+        },
+        error: (e) => {console.error(e)},
+        complete: () => console.info('complete') 
+    },
+    
+    )
+    
+  }
+  changeStatusReasigned(){
+
   }
   
 }

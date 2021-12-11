@@ -7,7 +7,13 @@ export interface TravelsData{
         id: number,
         operationDate: string,
         observation: string,
-        cadete: string,
+        cadete: {
+          id: number,
+          email: string,
+          fullName: string,
+          address: string,
+          cellPhone: string
+        },
         operator:{
           id: number,
           email: string,
