@@ -43,9 +43,9 @@ export class TravelsComponent implements OnInit{
 
   constructor(private travelStatusService:TravelsStatusService, private changeStatusService: ChangeStatusService, private equipmentStatusService :EquipmentStatusService){}
   ngOnInit(){
-    this.receiveData({travelId:0,isReasigned:false, newStatusTravel:0,cadeteId:0, userOperation:0,Observations:''},(a:number,b:TravelsData[])=>{});
+    this.receiveData(); 
 
-    this.receiveCurseData(1,(a:number,b:TravelsData[])=>{});
+    this.receiveCurseData();
     
     
   }
@@ -58,6 +58,9 @@ export class TravelsComponent implements OnInit{
        console.log('El viaje está disponible')
        this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
          console.log(resp);
+         this.receiveData();
+         this.receiveCurseData();
+
        })
      }
     }
@@ -66,7 +69,7 @@ export class TravelsComponent implements OnInit{
   }
 
   
-  receiveData(changeOptions:ChangeOptions,callback:Function){
+  receiveData(){
    let uno = this.travelStatusService.travelsGet(1);
    let cinco = this.travelStatusService.travelsGet(5);
    
@@ -79,13 +82,13 @@ export class TravelsComponent implements OnInit{
          return (Date.parse(a.travelEquipmentDTOs[a.travelEquipmentDTOs.length- 1].operationDate)- Date.parse(b.travelEquipmentDTOs[b.travelEquipmentDTOs.length- 1].operationDate));
          
        });
-       callback(changeOptions,this.cards);
+       
      }
      
    )
     
   }
-  receiveCurseData(id:number,callback:Function){
+  receiveCurseData(){
     let dos = this.travelStatusService.travelsGet(2);
     let tres = this.travelStatusService.travelsGet(3);
     let seis = this.travelStatusService.travelsGet(6);
@@ -106,7 +109,7 @@ export class TravelsComponent implements OnInit{
           return (Date.parse(a.travelEquipmentDTOs[a.travelEquipmentDTOs.length- 1].operationDate)- Date.parse(b.travelEquipmentDTOs[b.travelEquipmentDTOs.length- 1].operationDate));
           
         });
-        callback(id,this.cardsCurse);
+        
       });
      
    }
