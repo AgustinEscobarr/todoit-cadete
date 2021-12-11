@@ -1,5 +1,5 @@
 export interface TravelsData{
-    id: 13,
+    id: number,
     creationDate: string,
     lastStatusTravel: number,
     travelEquipmentDTOs: [

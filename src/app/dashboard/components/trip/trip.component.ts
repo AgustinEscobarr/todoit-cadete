@@ -25,7 +25,7 @@ export class TripComponent implements OnInit {
   
   ngOnInit(): void {
   }
-  requestTrip(changeOptions:ChangeOptions,status:number){
+  requestTrip(changeOptions:ChangeOptions){
     console.log(changeOptions.travelId);
     
     this.onChangeStatus.emit(changeOptions);

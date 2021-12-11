@@ -14,4 +14,5 @@ export class TravelsStatusService {
     
     return this.http.get<[]>(`/api/Travel/2/${statusTravel}`);
   }
+  
 }

@@ -10,9 +10,8 @@ export class ChangeStatusService {
 
   constructor(private http: HttpClient) { }
 
-  changeStatus(changeOptions:ChangeOptions): Observable<[]> {
-    //let loged=1
+  changeStatus(changeOptions:ChangeOptions): Observable<ChangeOptions> {
     
-    return this.http.post<[]>(`/api/Travel?travelId=${changeOptions.travelId}&statusTravel=${changeOptions.newStatusTravel}&userOperation=${changeOptions.userOperation}&cadeteId=${changeOptions.cadeteId}&isReasigned=${changeOptions.isReasigned}`,changeOptions);
+    return this.http.post<ChangeOptions>(`/api/Travel?travelId=${changeOptions.travelId}&statusTravel=${changeOptions.newStatusTravel}&userOperation=${changeOptions.userOperation}&cadeteId=${changeOptions.cadeteId}&isReasigned=${changeOptions.isReasigned}`,changeOptions);
   }
 }

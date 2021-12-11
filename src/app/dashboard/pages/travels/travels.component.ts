@@ -5,6 +5,7 @@ import { TravelsStatusService } from '../../services/travels-status.service';
 import { forkJoin} from 'rxjs';
 import { ChangeStatusService } from '../../services/change-status.service';
 import { ChangeOptions } from '../../models/change-options';
+import { EquipmentStatusService } from '../../services/equipment-status.service';
 
 
 interface options{
@@ -39,9 +40,8 @@ export class TravelsComponent implements OnInit{
   
 
   @Input()id: number=0;
-  constructor(private travelStatusService:TravelsStatusService, private changeStatusService: ChangeStatusService){}
-  
 
+  constructor(private travelStatusService:TravelsStatusService, private changeStatusService: ChangeStatusService, private equipmentStatusService :EquipmentStatusService){}
   ngOnInit(){
     this.receiveData({travelId:0,isReasigned:false, newStatusTravel:0,cadeteId:0, userOperation:0,Observations:''},(a:number,b:TravelsData[])=>{});
 
@@ -49,6 +49,23 @@ export class TravelsComponent implements OnInit{
     
     
   }
+
+  // CONSULTO EL EQUIPAMIENTO, QUE TIENE EL MISMO ID QUE EL VIAJE, PARA SABER SI YA LO TOMARON O NO.
+  requestTripValidate(changeOptions:ChangeOptions){
+   this.equipmentStatusService.equipmentGet(changeOptions.travelId).subscribe(resp=>{
+     if(changeOptions.newStatusTravel==2||changeOptions.newStatusTravel==6){
+     if(resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==1||resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==5){
+       console.log('El viaje está disponible')
+       this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
+         console.log(resp);
+       })
+     }
+    }
+   })
+
+  }
+
+  
   receiveData(changeOptions:ChangeOptions,callback:Function){
    let uno = this.travelStatusService.travelsGet(1);
    let cinco = this.travelStatusService.travelsGet(5);
@@ -79,8 +96,8 @@ export class TravelsComponent implements OnInit{
         this.cardsCurse=[...resp[0],...resp[1],...resp[2],...resp[3]];
         this.cardsCurse=this.cardsCurse.filter((item:TravelsData)=>{
           if(item.travelEquipmentDTOs[item.travelEquipmentDTOs.length-1].cadete){
-            console.log(JSON.parse(localStorage.getItem('userLoged')||'').id);
-            return item.travelEquipmentDTOs[item.travelEquipmentDTOs.length-1].cadete.id===JSON.parse(localStorage.getItem('userLoged')||'').id;
+            
+            return item.travelEquipmentDTOs[item.travelEquipmentDTOs.length-1].cadete.id==JSON.parse(localStorage.getItem('userLoged')||'').id;
           }
           return false;
         })
@@ -93,53 +110,10 @@ export class TravelsComponent implements OnInit{
       });
      
    }
-  requestTripValidate(changeOptions:ChangeOptions,cards:TravelsData[]):Function{
-    if(changeOptions.newStatusTravel==2||changeOptions.newStatusTravel==6){
-      for(let i=0;i<=cards.length -1; i++){
-        if(cards[i].id==changeOptions.travelId){
-          console.log("todavía disponible")
-          
-          this.changeStatusGeneral(changeOptions);
-          
-          break;
-        }else{
-          //Acá iría un mensaje de error, para decir que el viaje que se intenta tomar, ya lo tomó otra persona.
-          console.log('No está disponible');
-        }
-      }
-
-    }else{
-      this.changeStatusGeneral(changeOptions);
-    }
-    
-        
-
-      return new Function('')
-  }
-  
-  changeStatusGeneral(changeOptions:ChangeOptions){
    
-    this.changeStatusService.changeStatus(changeOptions).subscribe(
-      {
-        next: (resp) =>
-        {
-          if(changeOptions.isReasigned){
-            console.log('Viaje reasignado con exito')
-          }else{
-            console.log('todo bien bro :), ya cambié el estado')
-          }
-          
-          console.log(resp);
-        },
-        error: (e) => {
-          console.error(e);
-          console.log('Error del servidor al intentar asignar nuevo estado al viaje')
-        },
-        complete: () => console.info('complete') 
-    },
-    
-    )
-    
-  }
+  
+  
+  
+ 
   
 }

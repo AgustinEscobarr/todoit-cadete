@@ -12,7 +12,7 @@
     </mat-card-content>
     <mat-card-actions>
 
-      <app-buttons-card [status]="card.lastStatusTravel" [travelId]="card.id" (onButtonEvent)="requestTrip($event, card.lastStatusTravel)"></app-buttons-card>
+      <app-buttons-card [status]="card.lastStatusTravel" [travelId]="card.id" (onButtonEvent)="requestTrip($event)"></app-buttons-card>
   
     </mat-card-actions>
   </mat-card>
