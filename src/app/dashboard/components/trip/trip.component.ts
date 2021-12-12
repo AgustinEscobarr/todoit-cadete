@@ -27,8 +27,11 @@ export class TripComponent implements OnInit {
   }
   requestTrip(changeOptions:ChangeOptions){
     console.log(changeOptions.travelId);
-    
+    console.log('emito el evento al padre')
     this.onChangeStatus.emit(changeOptions);
+  }
+  pressCard(card:TravelsData){
+    alert(card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].operationDate.slice(0,-17))
   }
 
 }

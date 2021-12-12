@@ -52,19 +52,60 @@ export class TravelsComponent implements OnInit{
 
   // CONSULTO EL EQUIPAMIENTO, QUE TIENE EL MISMO ID QUE EL VIAJE, PARA SABER SI YA LO TOMARON O NO.
   requestTripValidate(changeOptions:ChangeOptions){
-   this.equipmentStatusService.equipmentGet(changeOptions.travelId).subscribe(resp=>{
-     if(changeOptions.newStatusTravel==2||changeOptions.newStatusTravel==6){
-     if(resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==1||resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==5){
-       console.log('El viaje está disponible')
-       this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
-         console.log(resp);
-         this.receiveData();
-         this.receiveCurseData();
+  
+    if((changeOptions.newStatusTravel===2 || changeOptions.newStatusTravel===6) && this.cardsCurse.length<=4){
+      
+      this.equipmentStatusService.equipmentGet(changeOptions.travelId).subscribe(resp=>{
+        
+           if(resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==1||resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==5){
+             
+             this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
+              console.log(resp);
+              console.log('el viaje es tuyo!!')
+              this.receiveData();
+             this.receiveCurseData();
 
-       })
-     }
-    }
-   })
+       });
+
+      }
+      if(resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==10 && resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].cadete.id==JSON.parse(localStorage.getItem('userLoged')||'').id){
+        console.log('recientemente renunciaste a este viaje, no puedes tomarlo');
+      }
+
+
+    });
+  }else(
+    console.log('No puedes tener mas de 4 viajes asignados')
+  )
+  if(changeOptions.isReasigned){
+    console.log('estoy acá para renunciar')
+    this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
+    console.log(resp);
+    this.receiveData();
+    this.receiveCurseData();
+
+    });
+  }
+  if(changeOptions.newStatusTravel===3 || changeOptions.newStatusTravel===7){
+    console.log('Ya tienes el equipo en tus manos!!!!')
+    this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
+    console.log(resp);
+    this.receiveData();
+    this.receiveCurseData();
+
+    });
+  }
+  if(changeOptions.newStatusTravel===4 || changeOptions.newStatusTravel===8){
+    console.log('Entregaste el equipo al lugar correspondiente')
+    this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
+    console.log(resp);
+    this.receiveData();
+    this.receiveCurseData();
+
+    });
+  }
+
+ 
 
   }
 
