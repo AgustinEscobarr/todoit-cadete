@@ -3,8 +3,8 @@
 <mat-form-field class="form-field" appearance="fill">
   <mat-label>Filtro</mat-label>
   <mat-select class="select" [(value)]="selected" >
-    <mat-option [value]=option.value *ngFor="let option of options" >
-      {{option.viewValue}}
+    <mat-option  [value]=option.value *ngFor="let option of options" >
+     <span style="font-weight: bold;"> {{option.viewValue}}</span>
     </mat-option>
   </mat-select>
 </mat-form-field>

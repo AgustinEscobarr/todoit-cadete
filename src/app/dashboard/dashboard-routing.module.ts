@@ -21,8 +21,8 @@ const routes: Routes = [
         component:HistoryComponent
       },
       {
-        path:'home',
-        component:HomeComponent
+        path:'',
+        component:TravelsComponent
       }
   ]
   }

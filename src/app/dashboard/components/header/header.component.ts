@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,12 +11,17 @@ export class HeaderComponent implements OnInit {
 
   expanded: boolean =false
   name:string=JSON.parse(localStorage.getItem('userLoged')||'').fullName
-  constructor() { }
+  constructor(private route:Router) { }
 
   ngOnInit(): void {
   }
   closePanel(){
     this.expanded=false;
+  }
+  cerrarSesion(){
+    localStorage.clear();
+    this.route.navigate(['auth']);
+    
   }
 
 }

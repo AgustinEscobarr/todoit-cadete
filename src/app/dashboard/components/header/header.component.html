@@ -14,10 +14,10 @@
         </mat-expansion-panel-header>
         
         <div class="content">
-      <a mat-list-item [routerLink]="['/auth/login']" routerLinkActive="router-link-active" (click)="closePanel()">Inicio de Sesion</a>
+      
       <a mat-list-item [routerLink]="['/dashboard/travels']" routerLinkActive="router-link-active" (click)="closePanel()">Viajes</a>
       <a mat-list-item [routerLink]="['/dashboard/history']" routerLinkActive="router-link-active" (click)="closePanel()">Historial de Viajes</a>
-      <a mat-list-item [routerLink]="['']" routerLinkActive="router-link-active" (click)="closePanel()">Cerrar Sesion</a>
+      <a mat-list-item  (click)="cerrarSesion()">Cerrar Sesion</a>
 
         </div>
       </mat-expansion-panel>

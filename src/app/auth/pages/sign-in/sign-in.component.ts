@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { UserLoged, UserLogin } from 'src/app/auth/models/user-login';
 import { LoginService } from '../../services/login.service';
 import { UserComplete } from '../../models/user-structure';
+import { AlertMessage } from 'src/app/dashboard/models/menssage-dialog';
+import { SignInAlertComponent } from '../../components/dialogs/sign-in-alert/sign-in-alert.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -19,7 +22,7 @@ export class SignInComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private route:Router, private loginService:  LoginService) { 
+  constructor(private route:Router, private loginService:  LoginService, public dialog:MatDialog) { 
     this.loginForm  = new FormGroup({
     
       email : new FormControl(''),
@@ -52,25 +55,44 @@ export class SignInComponent implements OnInit {
       console.log(resp);
       let userLoged= new UserLoged('');
       if(resp.rol.id==2){
-      userLoged.id=resp.id.toString()
-      userLoged.fullName=resp.fullName;
-      userLoged.email=resp.email;
-      console.log(userLoged)
-      localStorage.setItem('userLoged', JSON.stringify(userLoged));
-      let loged = JSON.parse(localStorage.getItem('userLoged')||"");
-      console.log(loged);
+        userLoged.id=resp.id.toString()
+        userLoged.fullName=resp.fullName;
+        userLoged.email=resp.email;
+        console.log(userLoged)
+        localStorage.setItem('userLoged', JSON.stringify(userLoged));
+        let loged = JSON.parse(localStorage.getItem('userLoged')||"");
+        console.log(loged);
+        let alert :AlertMessage={
+          validate:true,
+          menssage:"Bienvenido"
+        }
+        this.dialog.open(SignInAlertComponent, {data:alert});
+        
+        this.redirect();
 
       }
       else{
-        alert("Usuario no permitido");
+        let alert :AlertMessage={
+          validate:false,
+          menssage:"Usuario no Permitido"
+        }
+        this.dialog.open(SignInAlertComponent, {data:alert});
       }    
       
+  },
+  error=>{
+    let alert :AlertMessage={
+      validate:false,
+      menssage:"Error del servidor: No se encuentra el usuario."
+    }
+    this.dialog.open(SignInAlertComponent, {data:alert})
+
   }
   );
   
   }
   redirect(){
-    this.route.navigate(['home']);
+    this.route.navigate(['dashboard']);
   }
   
   

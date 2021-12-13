@@ -1,6 +1,10 @@
 *{
     font-size: 1rem;
 }
+.content{
+    display: flex;
+    align-items: center;
+}
 .items{
     font-weight: bolder;
     font-size: 1rem;
@@ -11,4 +15,16 @@
     margin-top: 1rem;
     margin-bottom: 1rem ;
     background-color: white;
+}
+div button{
+    border:none;
+    background-color: white;
+}
+
+
+.button-map:hover{
+    background-color: #71d882;
+    
+    transition: 0.5s;
+
 }

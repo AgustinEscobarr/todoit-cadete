@@ -49,6 +49,9 @@ mat-panel-title{
 .userName{
     margin: auto;
 }
+a{
+    cursor: pointer;
+}
 @media screen and (min-width:600px) {
     mat-panel-description{
         margin-left: 20rem;
