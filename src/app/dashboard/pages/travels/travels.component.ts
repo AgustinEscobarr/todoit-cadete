@@ -7,6 +7,10 @@ import { ChangeStatusService } from '../../services/change-status.service';
 import { ChangeOptions } from '../../models/change-options';
 import { EquipmentStatusService } from '../../services/equipment-status.service';
 
+import { MatDialog } from '@angular/material/dialog';
+import { AlertComponent } from '../../components/dialogs/alert/alert.component';
+import { AlertMessage } from '../../models/menssage-dialog';
+
 
 interface options{
   value:boolean,
@@ -41,7 +45,7 @@ export class TravelsComponent implements OnInit{
 
   @Input()id: number=0;
 
-  constructor(private travelStatusService:TravelsStatusService, private changeStatusService: ChangeStatusService, private equipmentStatusService :EquipmentStatusService){}
+  constructor(private travelStatusService:TravelsStatusService, private changeStatusService: ChangeStatusService, private equipmentStatusService :EquipmentStatusService, public dialog: MatDialog){}
   ngOnInit(){
     this.receiveData(); 
 
@@ -58,21 +62,46 @@ export class TravelsComponent implements OnInit{
     if((changeOptions.newStatusTravel===2 || changeOptions.newStatusTravel===6)){
       console.log('acá entré tambien')
       
+      
       this.equipmentStatusService.equipmentGet(changeOptions.travelId).subscribe(resp=>{
+        if(!resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length-1].cadete){
+          this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
+            console.log(resp);
+            console.log('Cadete es nulo, por eso entra')
+            let alert :AlertMessage={
+              validate:true,
+              menssage:"El viaje ahora es tuyo!!!"
+            }
+            this.dialog.open(AlertComponent, {data:alert})
+            this.receiveData();
+           this.receiveCurseData();
+
+     });
+
+        }
+        else if((resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==1||resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==5 ||( resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1 ].statusTravel==10) && !(resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length-1].cadete.id==changeOptions.cadeteId))){
+          console.log('acá entra porque el producto tiene un status travel en 1 o 5, o porque está en 10 y no tiene mi id')
+          this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
+            
+            console.log(resp);
+            let alert :AlertMessage={
+              validate:true,
+              menssage:"El viaje ahora es tuyo!!!"
+            }
+            this.dialog.open(AlertComponent, {data:alert})
+            this.receiveData();
+           this.receiveCurseData();
+
+     });
+    }
         
-      if((resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==1||resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==5 || resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1 ].statusTravel==10) && !(resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length-1].cadete.id==changeOptions.cadeteId)){
-             
-             this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
-              console.log(resp);
-              console.log('el viaje es tuyo!!')
-              this.receiveData();
-             this.receiveCurseData();
-
-       });
-
-      }
+      
       if(resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1 ].statusTravel==10 && resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length-1].cadete.id==changeOptions.cadeteId){
-        console.log('recientemente renunciaste a este viaje, no puedes tomarlo');
+        let alert :AlertMessage={
+          validate:false,
+          menssage:"Recientemente renunciaste a este viaje, no puedes tomarlo."
+        }
+        this.dialog.open(AlertComponent, {data:alert})
       }
 
 
@@ -80,6 +109,11 @@ export class TravelsComponent implements OnInit{
   }else if(changeOptions.isReasigned){
     console.log('estoy acá para renunciar')
     this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
+      let alert :AlertMessage={
+        validate:true,
+        menssage:"Renunciaste al viaje, recuerda que no podras volver a tomarlo hasta que otro lo rechaze."
+      }
+      this.dialog.open(AlertComponent, {data:alert})
     console.log(resp);
     this.receiveData();
     this.receiveCurseData();
@@ -89,6 +123,11 @@ export class TravelsComponent implements OnInit{
   else if(changeOptions.newStatusTravel===3 || changeOptions.newStatusTravel===7){
     console.log('Ya tienes el equipo en tus manos!!!!')
     this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
+      let alert :AlertMessage={
+        validate:true,
+        menssage:"Ya tienes el Equipo!!!, llevalo con cuidado..."
+      }
+      this.dialog.open(AlertComponent, {data:alert})
     console.log(resp);
     this.receiveData();
     this.receiveCurseData();
@@ -98,6 +137,11 @@ export class TravelsComponent implements OnInit{
   else if(changeOptions.newStatusTravel===4 || changeOptions.newStatusTravel===8){
     console.log('Entregaste el equipo al lugar correspondiente')
     this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
+      let alert :AlertMessage={
+        validate:true,
+        menssage:"Muy bien!!!, entregaste el equipo!"
+      }
+      this.dialog.open(AlertComponent, {data:alert})
     console.log(resp);
     this.receiveData();
     this.receiveCurseData();
@@ -106,6 +150,11 @@ export class TravelsComponent implements OnInit{
   }
   }else{
     console.log('no puedes tener mas de 4 viajes en curso')
+    let alert :AlertMessage={
+      validate:false,
+      menssage:"No puedes aceptar mas de 4 viajes."
+    }
+    this.dialog.open(AlertComponent, {data:alert})
   }
 }
 
@@ -141,7 +190,7 @@ export class TravelsComponent implements OnInit{
         this.cardsCurse=this.cardsCurse.filter((item:TravelsData)=>{
           if(item.travelEquipmentDTOs[item.travelEquipmentDTOs.length-1].cadete){
             
-            return item.travelEquipmentDTOs[item.travelEquipmentDTOs.length-1].cadete.id==JSON.parse(localStorage.getItem('userLoged')||'').id;
+            return (item.travelEquipmentDTOs[item.travelEquipmentDTOs.length-1].cadete.id==JSON.parse(localStorage.getItem('userLoged')||'').id);
           }
           return false;
         })

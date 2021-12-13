@@ -13,6 +13,7 @@ import { UserComplete } from '../../models/user-structure';
 })
 export class SignInComponent implements OnInit {
 
+  hide :boolean = true;
   user= new UserLogin();
   
 

@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TravelsData } from '../../models/travels-structure';
 import { ChangeOptions } from '../../models/change-options';
+import { MatDialog } from '@angular/material/dialog';
+import { CardExpansionComponent } from '../dialogs/card-expansion/card-expansion.component';
 export interface DataTravel{
   id:number,
   status? :number,
@@ -17,7 +19,7 @@ export class TripComponent implements OnInit {
 
   @Input() cards:TravelsData[]=[];
   @Output() onChangeStatus: EventEmitter<ChangeOptions>=new EventEmitter;
-  constructor() { }
+  constructor(public dialog: MatDialog) {}
 
   cardsEnvio():TravelsData[]{
 
@@ -32,7 +34,12 @@ export class TripComponent implements OnInit {
     console.log('emito el evento al padre')
     this.onChangeStatus.emit(changeOptions);
   }
-  pressCard(card:TravelsData){
+  openDialog(card: TravelsData):void{
+    const dialogRef = this.dialog.open(CardExpansionComponent, {data:card});
+
+  }
+  pressCard(card:TravelsData):void{
+
     window.open(`https://www.google.com/maps/place/${card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].equipment.cliente.address.replace(' ','+')}`, '_blank');
   }
 

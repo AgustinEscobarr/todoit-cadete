@@ -1,0 +1,12 @@
+
+<div class="content" mat-dialog-content>
+    <div class="img-container">
+    <img *ngIf="alert.validate" src="../../../../../assets/checkgreen.gif" alt="">
+    <img *ngIf="!alert.validate" src="../../../../../assets/errorred.gif" alt="">
+     </div>
+     <h3 mat-dialog-title>{{alert.menssage}}</h3>
+    
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

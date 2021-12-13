@@ -1,5 +1,5 @@
 
-<button class="button-ok" mat-raised-button *ngIf="(status==1)||(status==5)" (click)="sendClick(
+<button type="button" class="button-ok" mat-raised-button *ngIf="(status==1)||(status==5)" (click)="sendClick(
     {
         travelId:travelId,
         isReasigned:false,
@@ -10,7 +10,7 @@
     }
 )"  >Quiero este viaje</button>
 
-<button class="button-get" mat-raised-button *ngIf="(status==2)||(status==6)" (click)="sendClick({
+<button type="button" class="button-get" mat-raised-button *ngIf="(status==2)||(status==6)" (click)="sendClick({
     travelId:travelId,
     isReasigned:false,
     newStatusTravel:status+1,

@@ -11,6 +11,9 @@ import {MatInputModule} from '@angular/material/input';
 import{MatDividerModule} from '@angular/material/divider'
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 
@@ -28,7 +31,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     FormsModule,
     MatDividerModule,
     MatToolbarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatIconModule,
+    MatDialogModule
     
   ],
   exports:[
@@ -41,7 +46,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatInputModule,
     MatDividerModule,
     MatToolbarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatIconModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule { }

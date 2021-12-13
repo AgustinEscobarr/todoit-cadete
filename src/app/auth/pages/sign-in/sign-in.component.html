@@ -10,11 +10,14 @@
               <input name="email" type="email" matInput formControlName="email" required>
             </mat-form-field>
             <mat-form-field class="matform" appearance="fill">
-              <mat-label class="namefield">Contraseña:</mat-label>
-              <input class="input" name="password" type="password" matInput formControlName="password" required>
+              <mat-label>Enter your password</mat-label>
+                <input  matInput [type]="hide ? 'password' : 'text'" name="password" type="password" matInput formControlName="password" required>
+                <button class="button-password" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
             </mat-form-field>
             
-                <button type="submit" mat-raised-button [disabled]="!loginForm.valid" >Entrar</button>
+                <button class="button-submit" type="submit" mat-raised-button [disabled]="!loginForm.valid" >Entrar</button>
             
         </form>
     
