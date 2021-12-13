@@ -2,19 +2,26 @@
 <mat-card class="example-card" *ngFor="let card of cardsEnvio()">
   <a mat-button (click)="pressCard(card)">
     <mat-card-title-group>
-      <span *ngIf="card.lastStatusTravel==10">Tengo status travel 10</span>
-      <mat-card-title>Marca {{card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].equipment.mark}}
+      
+      <mat-card-title>
         </mat-card-title>
-      <mat-card-subtitle>Modelo {{card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].equipment.model}}</mat-card-subtitle>
-      <img mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+      <mat-card-subtitle></mat-card-subtitle>
+      
     </mat-card-title-group>
     <mat-card-content>
-     Contenido de la carta
+     Direccion: {{card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].equipment.cliente.address}}
+     <mat-divider inset></mat-divider>
+     Hora: {{card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].operationDate.slice(11,-11)}}
+     <mat-divider inset></mat-divider>
+     Equipo: {{card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].equipment.mark}}, {{card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].equipment.model}}
+     <mat-divider inset></mat-divider>
+     Estado:
+     <mat-divider inset></mat-divider>
     </mat-card-content>
   </a>
     <mat-card-actions>
 
-      <app-buttons-card [status]="card.lastStatusTravel" [travelId]="card.id" (onButtonEvent)="requestTrip($event)"></app-buttons-card>
+      <app-buttons-card *ngIf="enableButtons" [status]="card.lastStatusTravel" [travelId]="card.id" (onButtonEvent)="requestTrip($event)"></app-buttons-card>
   
     </mat-card-actions>
   

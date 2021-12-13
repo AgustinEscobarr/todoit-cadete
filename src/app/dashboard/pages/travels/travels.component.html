@@ -9,5 +9,5 @@
   </mat-select>
   <span>{{selected}}</span>
 </mat-form-field>
-<app-trip *ngIf="selected" [cards]="cards" (onChangeStatus)=" requestTripValidate($event)" ></app-trip>
-<app-trip *ngIf="!selected" [cards]="cardsCurse" (onChangeStatus)=" requestTripValidate($event)"></app-trip>
+<app-trip [enableButtons]="true" *ngIf="selected" [cards]="cards" (onChangeStatus)=" requestTripValidate($event)" ></app-trip>
+<app-trip [enableButtons]="true" *ngIf="!selected" [cards]="cardsCurse" (onChangeStatus)=" requestTripValidate($event)"></app-trip>

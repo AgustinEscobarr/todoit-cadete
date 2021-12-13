@@ -13,6 +13,8 @@ export interface DataTravel{
 })
 export class TripComponent implements OnInit {
 
+  @Input()enableButtons:boolean=true;
+
   @Input() cards:TravelsData[]=[];
   @Output() onChangeStatus: EventEmitter<ChangeOptions>=new EventEmitter;
   constructor() { }
@@ -31,7 +33,7 @@ export class TripComponent implements OnInit {
     this.onChangeStatus.emit(changeOptions);
   }
   pressCard(card:TravelsData){
-    alert(card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].operationDate.slice(0,-17))
+    window.open(`https://www.google.com/maps/place/${card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].equipment.cliente.address.replace(' ','+')}`, '_blank');
   }
 
 }

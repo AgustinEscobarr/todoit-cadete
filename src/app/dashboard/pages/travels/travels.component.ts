@@ -52,12 +52,13 @@ export class TravelsComponent implements OnInit{
 
   // CONSULTO EL EQUIPAMIENTO, QUE TIENE EL MISMO ID QUE EL VIAJE, PARA SABER SI YA LO TOMARON O NO.
   requestTripValidate(changeOptions:ChangeOptions){
+    console.log('entré')
   
     if((changeOptions.newStatusTravel===2 || changeOptions.newStatusTravel===6) && this.cardsCurse.length<=4){
       
       this.equipmentStatusService.equipmentGet(changeOptions.travelId).subscribe(resp=>{
         
-           if(resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==1||resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==5){
+      if(resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==1||resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==5){
              
              this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
               console.log(resp);
@@ -68,7 +69,7 @@ export class TravelsComponent implements OnInit{
        });
 
       }
-      if(resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==10 && resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].cadete.id==JSON.parse(localStorage.getItem('userLoged')||'').id){
+      else if(resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1 ].statusTravel==10 && (resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].cadete.id==JSON.parse(localStorage.getItem('userLoged')||'').id)){
         console.log('recientemente renunciaste a este viaje, no puedes tomarlo');
       }
 

@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatInputModule} from '@angular/material/input';
+import{MatDividerModule} from '@angular/material/divider'
+
 
 
 
@@ -20,7 +22,9 @@ import {MatInputModule} from '@angular/material/input';
     MatCardModule,
     MatMenuModule,
     ReactiveFormsModule ,
-    FormsModule
+    FormsModule,
+    MatDividerModule
+    
   ],
   exports:[
     MatSelectModule,
@@ -29,7 +33,8 @@ import {MatInputModule} from '@angular/material/input';
     MatMenuModule,
     ReactiveFormsModule ,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    MatDividerModule
   ]
 })
 export class MaterialModule { }
