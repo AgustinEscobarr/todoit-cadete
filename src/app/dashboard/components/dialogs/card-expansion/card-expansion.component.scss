@@ -20,11 +20,13 @@ div button{
     border:none;
     background-color: white;
 }
-
-
+.button-map{
+    margin: auto;
+    border: 1px solid black;
+ 
+}
 .button-map:hover{
     background-color: #71d882;
-    
     transition: 0.5s;
 
 }
