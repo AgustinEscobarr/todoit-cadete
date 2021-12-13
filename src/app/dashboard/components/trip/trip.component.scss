@@ -4,9 +4,8 @@
     align-items: center;
 }
 .card{
-    width: 90%;
+    width: 95%;
     max-width: 70rem;
-    margin: auto;
     margin-top: 1rem;
     margin-bottom: 1rem ;
     background-color: white;
@@ -15,4 +14,21 @@ app-buttons-card{
    
     align-items: center;
     
+}
+@media screen and (min-width:768px) {
+    .container{
+        flex-direction:unset;
+        flex-wrap: wrap;
+        justify-content: center;
+
+    }
+    .card{
+        margin: 2rem;
+        width: 12rem;
+        height: 12rem;
+    }
+    
+}
+.items{
+    font-weight: bolder;
 }

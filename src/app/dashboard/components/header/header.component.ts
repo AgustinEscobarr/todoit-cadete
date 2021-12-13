@@ -9,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   expanded: boolean =false
-  
+  name:string=JSON.parse(localStorage.getItem('userLoged')||'').fullName
   constructor() { }
 
   ngOnInit(): void {

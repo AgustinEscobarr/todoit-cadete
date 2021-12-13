@@ -25,6 +25,8 @@ mat-expansion-panel:hover{
     background: $back-color!important;
 }
 mat-panel-description{
+    display: flex;
+    align-items: center;
     color: white;
 }
 mat-panel-title{
@@ -43,4 +45,13 @@ mat-panel-title{
     font-size: 1.2rem;
     margin-left: 0.7rem;
     color: white;
+}
+.userName{
+    margin: auto;
+}
+@media screen and (min-width:600px) {
+    mat-panel-description{
+        margin-left: 20rem;
+    }
+    
 }
