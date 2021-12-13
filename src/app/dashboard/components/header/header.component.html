@@ -1,5 +1,27 @@
-<button mat-button [matMenuTriggerFor]="menu">Menu</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item>Item 1</button>
-  <button mat-menu-item>Item 2</button>
-</mat-menu>
+<header >
+  
+    
+    <mat-accordion>
+      <mat-expansion-panel hideToggle [expanded]="expanded" (afterExpand)="expanded=true" >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            This is the expansion title
+          </mat-panel-title>
+          <mat-panel-description>
+            This is a summary of the content
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        
+        <div class="content">
+      <a mat-list-item [routerLink]="['/auth/login']" routerLinkActive="router-link-active" (click)="closePanel()">Inicio de Sesion</a>
+      <a mat-list-item [routerLink]="['/dashboard/travels']" routerLinkActive="router-link-active" (click)="closePanel()">Viajes</a>
+      <a mat-list-item [routerLink]="['/dashboard/history']" routerLinkActive="router-link-active" (click)="closePanel()">Historial de Viajes</a>
+      <a mat-list-item [routerLink]="['']" routerLinkActive="router-link-active" (click)="closePanel()">Cerrar Sesion</a>
+
+        </div>
+      </mat-expansion-panel>
+      
+    </mat-accordion>  
+    
+  
+</header>

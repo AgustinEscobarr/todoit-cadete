@@ -20,6 +20,6 @@ import { ComponentsModule } from '../components/components.module';
     FormsModule,
     ComponentsModule
   ],
-  exports:[HistoryComponent, HomeComponent, TravelsComponent]
+  exports:[HistoryComponent, HomeComponent, TravelsComponent,ComponentsModule]
 })
 export class DashboardPagesModule { }

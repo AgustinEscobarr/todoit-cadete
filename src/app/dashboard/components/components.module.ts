@@ -5,6 +5,8 @@ import { MainComponent } from './main/main.component';
 import { TripComponent } from './trip/trip.component';
 import { MaterialModule } from 'src/app/material.module';
 import { ButtonsCardComponent } from './buttons-card/buttons-card.component';
+import { RouterModule } from '@angular/router';
+
 
 
 
@@ -13,6 +15,7 @@ import { ButtonsCardComponent } from './buttons-card/buttons-card.component';
   declarations: [HeaderComponent,MainComponent, TripComponent, ButtonsCardComponent],
   imports: [
     CommonModule,
+    RouterModule,
     MaterialModule
   ],
   exports:[HeaderComponent,MainComponent, TripComponent]

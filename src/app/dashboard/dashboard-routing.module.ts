@@ -8,20 +8,24 @@ import { TravelsComponent } from './pages/travels/travels.component';
 const routes: Routes = [
   { 
     path: '', 
-    component: TravelsComponent 
-  },
-  {
-    path:'travels',
-    component:TravelsComponent
-  },
-  {
-    path:'history',
-    component:HistoryComponent
-  },
-  {
-    path:'home',
-    component:HomeComponent
+    component: DashboardComponent ,
+    children:[
+      {
+        path:'travels',
+        component:TravelsComponent
+      },
+      {
+        path:'history',
+        component:HistoryComponent
+      },
+      {
+        path:'home',
+        component:HomeComponent
+      }
+  ]
   }
+  ,
+  
 ];
 
 @NgModule({

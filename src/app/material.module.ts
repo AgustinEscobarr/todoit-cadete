@@ -9,6 +9,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatInputModule} from '@angular/material/input';
 import{MatDividerModule} from '@angular/material/divider'
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 
 
@@ -23,7 +26,9 @@ import{MatDividerModule} from '@angular/material/divider'
     MatMenuModule,
     ReactiveFormsModule ,
     FormsModule,
-    MatDividerModule
+    MatDividerModule,
+    MatToolbarModule,
+    MatExpansionModule
     
   ],
   exports:[
@@ -34,7 +39,9 @@ import{MatDividerModule} from '@angular/material/divider'
     ReactiveFormsModule ,
     FormsModule,
     MatInputModule,
-    MatDividerModule
+    MatDividerModule,
+    MatToolbarModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule { }

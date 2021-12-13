@@ -9,14 +9,14 @@
       
     </mat-card-title-group>
     <mat-card-content>
-     Direccion: {{card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].equipment.cliente.address}}
+     Direccion:<span *ngIf="card.lastStatusTravel==1||card.lastStatusTravel==2||card.lastStatusTravel==3||card.lastStatusTravel==4"> {{card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].equipment.cliente.address}}</span><span *ngIf="card.lastStatusTravel==5||card.lastStatusTravel==6||card.lastStatusTravel==7||card.lastStatusTravel==8">En el Local</span>
      <mat-divider inset></mat-divider>
      Hora: {{card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].operationDate.slice(11,-11)}}
      <mat-divider inset></mat-divider>
      Equipo: {{card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].equipment.mark}}, {{card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].equipment.model}}
      <mat-divider inset></mat-divider>
-     Estado:
-     <mat-divider inset></mat-divider>
+     Estado: <span *ngIf="card.lastStatusTravel==1||card.lastStatusTravel==5">Pendiente a Retirar</span><span *ngIf="card.lastStatusTravel==2||card.lastStatusTravel==6">Asignado</span><span *ngIf="card.lastStatusTravel==3||card.lastStatusTravel==7">En curso</span><span *ngIf="card.lastStatusTravel==4||card.lastStatusTravel==8">Finalizado</span>
+     
     </mat-card-content>
   </a>
     <mat-card-actions>
