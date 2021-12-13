@@ -1,9 +1,46 @@
-
+$back-color: #002984;
 .content{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    margin-top: 20vh;
     height: 100vh;
+    width: 100%;
 }
 a{
     text-decoration: none;
+    color: white;
+    margin: 2rem;
+    font-size: 1.8rem;
+}
+
+ mat-expansion-panel{
+    background-color: $back-color;
+    box-decoration-break: inherit;
+    color: white;
+    
+    
+}
+mat-expansion-panel:hover{
+    background: $back-color!important;
+}
+mat-panel-description{
+    color: white;
+}
+mat-panel-title{
+    display: flex;
+    align-items: center;
+    width: 10rem;
+}
+.disable_ripple{
+    background: $back-color!important;
+}
+.image{
+    transform: scale(0.8);
+}
+.title-logo{
+    text-align: left;
+    font-size: 1.2rem;
+    margin-left: 0.7rem;
+    color: white;
 }

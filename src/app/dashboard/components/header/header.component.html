@@ -1,14 +1,15 @@
 <header >
   
     
-    <mat-accordion>
-      <mat-expansion-panel hideToggle [expanded]="expanded" (afterExpand)="expanded=true" >
-        <mat-expansion-panel-header>
+    
+      <mat-expansion-panel  [expanded]="expanded" (afterExpand)="expanded=true" >
+        <mat-expansion-panel-header class="disable_ripple">
           <mat-panel-title>
-            This is the expansion title
+            <img class="image" src="../assets/logo.svg"/>
+            <span class="title-logo">Todo IT</span>
           </mat-panel-title>
           <mat-panel-description>
-            This is a summary of the content
+            
           </mat-panel-description>
         </mat-expansion-panel-header>
         
@@ -21,7 +22,7 @@
         </div>
       </mat-expansion-panel>
       
-    </mat-accordion>  
+     
     
   
 </header>

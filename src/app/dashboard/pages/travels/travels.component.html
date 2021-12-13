@@ -1,13 +1,13 @@
-
-<h4>Filtro</h4>
-<mat-form-field appearance="fill">
+<div class="container">
+<h2> Viajes</h2>
+<mat-form-field class="form-field" appearance="fill">
   <mat-label>Viajes</mat-label>
-  <mat-select [(value)]="selected" >
+  <mat-select class="select" [(value)]="selected" >
     <mat-option [value]=option.value *ngFor="let option of options" >
       {{option.viewValue}}
     </mat-option>
   </mat-select>
-  <span>{{selected}}</span>
 </mat-form-field>
-<app-trip [enableButtons]="true" *ngIf="selected" [cards]="cards" (onChangeStatus)=" requestTripValidate($event)" ></app-trip>
-<app-trip [enableButtons]="true" *ngIf="!selected" [cards]="cardsCurse" (onChangeStatus)=" requestTripValidate($event)"></app-trip>
+<app-trip class="cards" [enableButtons]="true" *ngIf="selected" [cards]="cards" (onChangeStatus)=" requestTripValidate($event)" ></app-trip>
+<app-trip class="cards" [enableButtons]="true" *ngIf="!selected" [cards]="cardsCurse" (onChangeStatus)=" requestTripValidate($event)"></app-trip>
+</div>
