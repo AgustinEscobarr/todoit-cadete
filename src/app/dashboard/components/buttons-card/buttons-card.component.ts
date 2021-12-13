@@ -15,8 +15,7 @@ export class ButtonsCardComponent implements OnInit {
   constructor() { }
 
   sendClick(changeOptions:ChangeOptions){
-    console.log('buttons');
-    console.log(changeOptions);
+    
     this.onButtonEvent.emit(changeOptions)
   }
   ngOnInit(): void {

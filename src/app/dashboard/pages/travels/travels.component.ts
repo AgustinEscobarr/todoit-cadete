@@ -56,18 +56,18 @@ export class TravelsComponent implements OnInit{
 
   // CONSULTO EL EQUIPAMIENTO, QUE TIENE EL MISMO ID QUE EL VIAJE, PARA SABER SI YA LO TOMARON O NO.
   requestTripValidate(changeOptions:ChangeOptions){
-    console.log('entré')
-    if(this.cardsCurse.length<=4){
+    
+    if(this.cardsCurse.length<=4){ //Se analiza la situacion de superar la cantidad maxima permitida de viajes en curso
   
     if((changeOptions.newStatusTravel===2 || changeOptions.newStatusTravel===6)){
-      console.log('acá entré tambien')
+     
       
       
       this.equipmentStatusService.equipmentGet(changeOptions.travelId).subscribe(resp=>{
         if(!resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length-1].cadete){
           this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
-            console.log(resp);
-            console.log('Cadete es nulo, por eso entra')
+            
+            
             let alert :AlertMessage={
               validate:true,
               menssage:"El viaje ahora es tuyo!!!"
@@ -80,10 +80,10 @@ export class TravelsComponent implements OnInit{
 
         }
         else if((resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==1||resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1].statusTravel==5 ||( resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length -1 ].statusTravel==10) && !(resp.travelEquipmentDTOs[resp.travelEquipmentDTOs.length-1].cadete.id==changeOptions.cadeteId))){
-          console.log('acá entra porque el producto tiene un status travel en 1 o 5, o porque está en 10 y no tiene mi id')
+          
           this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
             
-            console.log(resp);
+            
             let alert :AlertMessage={
               validate:true,
               menssage:"El viaje ahora es tuyo!!!"
@@ -107,49 +107,49 @@ export class TravelsComponent implements OnInit{
 
     });
   }else if(changeOptions.isReasigned){
-    console.log('estoy acá para renunciar')
+    
     this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
       let alert :AlertMessage={
         validate:true,
         menssage:"Renunciaste al viaje, recuerda que no podras volver a tomarlo hasta que otro lo rechaze."
       }
       this.dialog.open(AlertComponent, {data:alert})
-    console.log(resp);
+    
     this.receiveData();
     this.receiveCurseData();
 
     });
   }
   else if(changeOptions.newStatusTravel===3 || changeOptions.newStatusTravel===7){
-    console.log('Ya tienes el equipo en tus manos!!!!')
+    
     this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
       let alert :AlertMessage={
         validate:true,
         menssage:"Ya tienes el Equipo!!!, llevalo con cuidado..."
       }
       this.dialog.open(AlertComponent, {data:alert})
-    console.log(resp);
+    
     this.receiveData();
     this.receiveCurseData();
 
     });
   }
   else if(changeOptions.newStatusTravel===4 || changeOptions.newStatusTravel===8){
-    console.log('Entregaste el equipo al lugar correspondiente')
+    
     this.changeStatusService.changeStatus(changeOptions).subscribe(resp=>{
       let alert :AlertMessage={
         validate:true,
         menssage:"Muy bien!!!, entregaste el equipo!"
       }
       this.dialog.open(AlertComponent, {data:alert})
-    console.log(resp);
+    
     this.receiveData();
     this.receiveCurseData();
 
     });
   }
   }else{
-    console.log('no puedes tener mas de 4 viajes en curso')
+    
     let alert :AlertMessage={
       validate:false,
       menssage:"No puedes aceptar mas de 4 viajes."
@@ -165,7 +165,7 @@ export class TravelsComponent implements OnInit{
    
    forkJoin([uno,cinco]).subscribe(
      resp=>{
-       console.log([...resp[0],...resp[1]]);
+       
        this.cards=[...resp[0],...resp[1]];
        
        this.cards.sort((a,b)=>{
@@ -185,7 +185,7 @@ export class TravelsComponent implements OnInit{
     let siete = this.travelStatusService.travelsGet(7);
     forkJoin([dos,tres,seis,siete]).subscribe(
       resp=>{
-        console.log([...resp[0],...resp[1],...resp[2],...resp[3]]);
+        
         this.cardsCurse=[...resp[0],...resp[1],...resp[2],...resp[3]];
         this.cardsCurse=this.cardsCurse.filter((item:TravelsData)=>{
           if(item.travelEquipmentDTOs[item.travelEquipmentDTOs.length-1].cadete){

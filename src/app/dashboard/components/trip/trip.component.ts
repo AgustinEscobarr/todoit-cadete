@@ -30,17 +30,13 @@ export class TripComponent implements OnInit {
   ngOnInit(): void {
   }
   requestTrip(changeOptions:ChangeOptions){
-    console.log(changeOptions.travelId);
-    console.log('emito el evento al padre')
+   
     this.onChangeStatus.emit(changeOptions);
   }
   openDialog(card: TravelsData):void{
     const dialogRef = this.dialog.open(CardExpansionComponent, {data:card});
 
   }
-  pressCard(card:TravelsData):void{
-
-    window.open(`https://www.google.com/maps/place/${card.travelEquipmentDTOs[card.travelEquipmentDTOs.length-1].equipment.cliente.address.replace(' ','+')}`, '_blank');
-  }
+  
 
 }

@@ -26,7 +26,7 @@ export class HistoryComponent implements OnInit {
     let nueve = this.travelStatusService.travelsGet(9);
     forkJoin([cuatro,cinco,seis,siete,ocho,nueve]).subscribe(
       resp=>{
-        console.log([...resp[0],...resp[1],...resp[2],...resp[3],...resp[4],...resp[5]]);
+        
         this.arrayHistory=[...resp[0],...resp[1],...resp[2],...resp[3],...resp[4],...resp[5]];
         this.arrayHistory.forEach(element=>{
           element.travelEquipmentDTOs.forEach(item=>{
