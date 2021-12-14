@@ -30,14 +30,14 @@ export class SignInComponent implements OnInit {
       
     })
 
-    console.log(this.loginForm);
+   
     
     
   }
   
   onSubmit(formDirective:FormGroupDirective){
     
-    console.log(this.loginForm);
+   
     
     this.user  = this.loginForm.value;
     
@@ -46,22 +46,21 @@ export class SignInComponent implements OnInit {
     this.loginForm.reset();
     
        
-      console.log(this.user.email);
-      console.log(this.user.password);
+      
       
       this.loginService.login (this.user).subscribe(  (resp:UserComplete) => {
   
-      console.log("Respuesta del servidor de login")
-      console.log(resp);
+      
+      
       let userLoged= new UserLoged('');
       if(resp.rol.id==2){
         userLoged.id=resp.id.toString()
         userLoged.fullName=resp.fullName;
         userLoged.email=resp.email;
-        console.log(userLoged)
+        
         localStorage.setItem('userLoged', JSON.stringify(userLoged));
         let loged = JSON.parse(localStorage.getItem('userLoged')||"");
-        console.log(loged);
+        
         let alert :AlertMessage={
           validate:true,
           menssage:"Bienvenido"
